@@ -2,15 +2,15 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './App.css';
 //Screens
-import HomeScreen from './components/HomeScreen';
-import ProductScreen  from './components/ProductScreen';
-import CartScreen from './components/CartScreen';
+import HomeScreen from './screens/HomeScreen';
+import ProductScreen  from './screens/ProductScreen';
+import CartScreen from './screens/CartScreen';
 //components
 import Navbar from './components/Navbar';
 import SideDrawer from './components/SideDrawer';
 import BackDrop from './components/BackDrop';
 
-function App() {
+const App = () => {
   const [sideToggle, setSideToggle] = useState(false);
 
   return (

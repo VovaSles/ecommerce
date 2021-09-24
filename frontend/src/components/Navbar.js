@@ -1,32 +1,42 @@
-import './Navbar.css';
-import {Link} from 'react-router-dom';
+import "./Navbar.css";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-function Navbar({click}) {
-    return (
-        <nav className="navbar">
-        <div className="navbar__logo">
-        <h2>My SHOP</h2>
-        </div>
-        <ul className="navbar__links">
-            <li >
-                <Link to="/cart" className="cart__link">
-                  <i className="fas fa-shopping-cart"></i>
-                  Cart
-                  <span className="cartlogo__badge">0</span>
-                </Link>
-            </li>
-            <li>
-                <Link to="/" className="shop__link"> Shop</Link>
-            </li>
-            </ul>  
-            {/* hamburger menu   */}
-            <div className="hamburger__menu" onClick={click}>
-            <div></div>
-            <div></div>
-            <div></div>
-            </div>
-        </nav>
-    )
-}
+const Navbar = ({ click }) => {
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
 
-export default Navbar
+  const getCartCount = () => {
+    return cartItems.reduce((qty, item) => Number(item.qty) + qty, 0);
+  };
+
+  return (
+    <nav className="navbar">
+      <div className="navbar__logo">
+        <h2>E-COMMERCE APP</h2>
+      </div>
+
+      <ul className="navbar__links">
+        <li>
+          <Link to="/cart" className="cart__link">
+            <i className="fas fa-shopping-cart"></i>
+            <span>
+              Cart <span className="cartlogo__badge">{getCartCount()}</span>
+            </span>
+          </Link>
+        </li>
+        <li>
+          <Link to="/">Shop</Link>
+        </li>
+      </ul>
+
+      <div className="hamburger__menu" onClick={click}>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
